@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Playfair Display", serif;
+}
+
+header {
+    background-color: #F5EFFF;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px 10px;
+}
+
+.header-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-right .user-photo {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+}
+
+.user-photo .user-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+.logout-menu {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.logout-menu a {
+    text-decoration: none;
+    color: #2196F3;
+    padding: 5px;
+    display: block;
+}
+
+.logout-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+img.logo {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    width: 60px;
+}
+
+img.logo + h3 {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    font-size: 10px;
+    background: linear-gradient(90deg, #003060, #2196F3);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #003060;
+    padding: 1rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 1rem 0;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    margin-left: 10px;
+    text-decoration: blink;
+}
+
+.content {
+    width: 80%;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+#view-users,
+#add-user,
+#update-user,
+#delete-user,
+#set-password {
+    position: relative;
+}
+
+#view-users p {
+    position: absolute;
+    left: 38%;
+    margin-top: 20px;
+    font-size: 18px;
+    background: linear-gradient(90deg, #003060, #2196F3);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+#view-users img {
+    position: absolute;
+    left: 30%;
+    top: 300%;
+    width: 30%;
+}
+
+#add-user form,
+#update-user form,
+#delete-user form,
+#set-password form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    padding: 10px 20px;
+}
+
+#add-user form input, #add-user form select,
+#update-user form input, #update-user form select,
+#delete-user form input, #set-password form input {
+    width: 30%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    margin-bottom: 1rem;
+    outline: none;
+}
+
+#add-user form input[type="submit"],
+#update-user form input[type="submit"],
+#delete-user form input[type="submit"],
+#set-password form input[type="submit"] {
+    background-color: #0E86D4;
+    color: #fff;
+    width: fit-content;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+    font-family: "Playfair Display", serif;
+}
+
+#add-user form input[type="submit"]:hover,
+#update-user form input[type="submit"]:hover,
+#delete-user form input[type="submit"]:hover,
+#set-password form input[type="submit"]:hover {
+    background-color: #0C62A1;
+}
+
+#add-user img,
+#update-user img,
+#delete-user img,
+#set-password img {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+}
+
+#update-user img,
+#delete-user img,
+#set-password img {
+    width: 40%;
+}
+
+.update-user {
+    margin-top: 20px;
+}
+
+.update-section {
+    margin-top: 15px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
