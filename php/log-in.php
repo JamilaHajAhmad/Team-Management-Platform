@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result && $result->num_rows > 0) {
         // Fetch the user data
         $row = $result->fetch_assoc();
-        $stored_password = $row['password']; // Hashed password from the database
+        $stored_password = $row['password']; 
         $user_type = $row['user_type'];
         $user_name = $row['name'];
         $img_url = $row['img_url'];
@@ -31,23 +31,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['img_url'] = $img_url;
 
             // Redirect based on user type
-            if ($user_type === 'Admin') {
+            if ($user_type === 'Admin')
+            {
                 header("Location: admin-dashboard.php");
-            } else {
+            } 
+            else 
+            {
                 header("Location: user-dashboard.php"); 
             }
             exit;
         }
-        else {
+        else
+        {
             $showError = "Invalid password. Please try again.";
         }
-    } else {
+    } 
+    else 
+    {
         $showError = "No account found with this email.";
     }
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <img src="../images/CrewHub-logo.png" alt="CrewHub Logo" class="logo">
     </header>
     <main>
-        <h2>Let’s Make Today Amazing – Log In to Begin!</h2>
-        <section class="log-in-form">
+        <h2 style="font-family: 'Playfair Display', serif;">Let’s Make Today Amazing!</h2>
+        <section class="log-in-form" style="top: 75%;">
             <form action="" method="post">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>

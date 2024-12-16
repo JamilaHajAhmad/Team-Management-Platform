@@ -2,56 +2,53 @@
 $exists=false;
 $showAlert = false;  
 $showError = false;
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  @include 'dbconfig.php';
+    @include 'dbconfig.php';
 
-  $name = test_input($_POST['name']);
-  $email = test_input($_POST['email']);
-  $password = $_POST['password'];
-  $cpassword = $_POST['confirm-password'];
-  $user_type = $_POST['account-type'];
-  $img_url = $_FILES['photo']['name'];
+    $name = test_input($_POST['name']);
+    $email = test_input($_POST['email']);
+    $password = $_POST['password'];
+    $cpassword = $_POST['confirm-password'];
+    $user_type = $_POST['account-type'];
+    $img_url = $_FILES['photo']['name'];
 
-  move_uploaded_file($_FILES['photo']['tmp_name'], '../uploads/'.$_FILES['photo']['name']);
+    move_uploaded_file($_FILES['photo']['tmp_name'], '../uploads/'.$_FILES['photo']['name']);
 
     $selectQuery = "SELECT * FROM user WHERE email = '$email'"; 
-    
     $result = $conn -> query($selectQuery); 
     
     $num = mysqli_num_rows($result);  
-
     if($num == 0) { 
-
-      if(($password == $cpassword) && $exists==false) { 
-  
-          
-          $insertQuery = "INSERT INTO user(name, email, password, user_type, img_url)
-          VALUES('$name','$email','$password','$user_type', '$img_url')";
-          $result = mysqli_query($conn, $insertQuery); 
-          if ($result) { 
-            echo ' <div class="alert alert-success  
-            alert-dismissible fade show" role="alert"
-            style="position:absolute;right:0px;width:fit-content;"> 
-            <strong>Success!</strong> Your account is  
-            now created and you can login.  
-            <button type="button" class="close"
-              data-dismiss="alert" aria-label="Close">  
-              <span aria-hidden="true">×</span>  
-            </button>  
-          </div> ';   
-          } 
-      }  
-      else {  
-          $showError = "Passwords do not match";  
-      }       
-  } 
-  if($num>0) { 
-      $exists='email already exist!';  
-  }  
-
+        if(($password == $cpassword) && $exists==false)
+        { 
+            $insertQuery = "INSERT INTO user(name, email, password, user_type, img_url)
+            VALUES('$name','$email','$password','$user_type', '$img_url')";
+            $result = mysqli_query($conn, $insertQuery); 
+            if ($result) 
+            { 
+                echo ' <div class="alert alert-success  
+                alert-dismissible fade show" role="alert"
+                style="position:absolute;right:0px;width:fit-content;"> 
+                <strong>Success!</strong> Your account is  
+                now created and you can login.  
+                <button type="button" class="close"
+                data-dismiss="alert" aria-label="Close">  
+                <span aria-hidden="true">×</span>  
+                </button>  
+                </div> ';   
+            } 
+        }  
+        else
+        {  
+            $showError = "Passwords do not match";  
+        }       
+    } 
+    if($num>0) { 
+        $exists='email already exist!';  
+    }  
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +69,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <?php 
-    
     if($showError) { 
         echo ' <div class="alert alert-danger  
             alert-dismissible fade show" role="alert"
@@ -83,8 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <span aria-hidden="true">×</span>  
             </button>  
             </div> ';  
-  } 
-        
+    } 
     if($exists) { 
         echo ' <div class="alert alert-danger  
             alert-dismissible fade show" role="alert"
@@ -94,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             data-dismiss="alert" aria-label="Close">  
             <span aria-hidden="true">×</span>  
             </button> 
-          </div> ';  
+            </div> ';  
     } 
 ?> 
     <header>
@@ -107,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <img src="../images/CrewHub-logo.png" alt="CrewHub Logo" class="logo">
     </header>
     <main>
-        <h2>Join us today! Fill in the details below to get started</h2>
+        <h2 style="font-family: 'Playfair Display', serif;">Join us Today!</h2>
         <section class="sign-up-form">
             <form action="" method="post" enctype="multipart/form-data">
                 <label for="name">Full Name</label>
