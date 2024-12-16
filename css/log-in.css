@@ -11,7 +11,6 @@ main h2 {
 
 section.log-in-form {
     position: absolute;
-    top: 70%;
     left: 50%;
     transform: translate(-50%, -70%);
     -webkit-transform: translate(-50%, -70%);
