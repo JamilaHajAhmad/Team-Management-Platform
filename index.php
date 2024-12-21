@@ -14,8 +14,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="php/log-in.php">Log in</a></li>
-                <li><a href="php/sign-up.php">Sign up</a></li>
+                <li><a class="link" href="php/about-us.php">About Us</a></li>
+                <li><a class="link" href="php/blog.php">Blog</a></li>
+                <li><a class="link" href="php/log-in.php">Log in</a></li>
+                <li><a class="link" href="php/sign-up.php">Sign up</a></li>
             </ul>
         </nav>
         <img src="images/CrewHub-logo.png" alt="CrewHub Logo" class="logo">
@@ -24,7 +26,7 @@
         <section class="hero">
             <h2>Your Hub for Seamless Teamwork</h2>
             <p>Collaborate, manage, and succeed with ease</p>
-            <button onclick="location.href='html/sign-up.html'">Sign Up Now</button>
+            <button onclick="location.href='php/sign-up.php'">Sign Up Now</button>
         </section>
         <img src="images/hero.png" alt="Hero Section Image" class="hero">
     </main>

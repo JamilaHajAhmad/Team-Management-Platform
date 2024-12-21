@@ -1,7 +1,7 @@
 <?php
 session_start();
+@include 'alert-handler.php'; 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +66,7 @@ session_start();
                     <input type="password" id="password" name="password" required>
 
                     <label for="profile-picture">Profile Photo</label>
-                    <input type="file" name="photo" id="profile-picture" style="border:none">
+                    <input type="file" name="photo" id="profile-picture" accept=".jpg, .png, .jpeg" style="border:none">
                     
                     <input type="submit" value="Add User">
                 </form>
@@ -114,7 +114,7 @@ session_start();
                     <!-- Profile Photo Update -->
                         <div class="update-section" id="update-photo" style="display: none;">
                             <label for="new-photo">New Profile Photo:</label>
-                            <input type="file" name="photo" id="new-photo" style="border:none">
+                            <input type="file" name="photo" id="new-photo" accept=".jpg, .png, .jpeg" style="border:none">
                         </div>
                     </div>
                     <input type="submit" value="Update User">
@@ -149,34 +149,26 @@ session_start();
             </section>
         </main>
     </div>
-
     <script>
-        // Function to handle section visibility
         function showSection(id) {
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
             document.getElementById(id).classList.add('active');
         }
-
         function toggleLogoutMenu() {
             var menu = document.getElementById('logoutMenu');
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
-
         function showUpdateField() {
-    const selectedField = document.getElementById('update-field').value;
-
-    // Hide all update sections
-    document.querySelectorAll('.update-section').forEach(section => {
-        section.style.display = 'none';
-    });
-
-    // Show the selected update section
-    if (selectedField) {
-        document.getElementById(`update-${selectedField}`).style.display = 'block';
-    }
-}
+            const selectedField = document.getElementById('update-field').value;
+            document.querySelectorAll('.update-section').forEach(section => {
+                section.style.display = 'none';
+            })
+            if (selectedField) {
+                document.getElementById(`update-${selectedField}`).style.display = 'block';
+            }
+        }
     </script>
 </body>
 </html>
