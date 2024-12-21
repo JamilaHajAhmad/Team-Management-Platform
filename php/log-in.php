@@ -1,36 +1,25 @@
 <?php
+@include 'dbconfig.php';
 $showError = false;  
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    @include 'dbconfig.php';
-
     $email = test_input($_POST['email']);
     $password = $_POST['password'];
-
-    // Check if the email exists
     $selectQuery = "SELECT * FROM user WHERE email = '$email'";
     $result = $conn->query($selectQuery);
-
-    if ($result && $result->num_rows > 0) {
-        // Fetch the user data
+    if ($result && $result->num_rows > 0) 
+    {
         $row = $result->fetch_assoc();
         $stored_password = $row['password']; 
         $user_type = $row['user_type'];
         $user_name = $row['name'];
         $img_url = $row['img_url'];
-
-        // Verify the password
-        if ($password === $stored_password) {
-
-            // Start a session and store user information
+        if (password_verify($password, $stored_password)) {
             session_start();
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
             $_SESSION['user_type'] = $user_type;
             $_SESSION['name'] = $user_name;
             $_SESSION['img_url'] = $img_url;
-
-            // Redirect based on user type
             if ($user_type === 'Admin')
             {
                 header("Location: admin-dashboard.php");
@@ -43,16 +32,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         else
         {
-            $showError = "Invalid password. Please try again.";
+            $showError = "Invalid password. Please try again!!!";
         }
     } 
     else 
     {
-        $showError = "No account found with this email.";
+        $showError = "No account found with this email!!!";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <nav>
             <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="sign-up.php">Sign up</a></li>
+                <li><a class="link" href="../index.php">Home</a></li>
+                <li><a class="link" href="sign-up.php">Sign up</a></li>
             </ul>
         </nav>
         <img src="../images/CrewHub-logo.png" alt="CrewHub Logo" class="logo">

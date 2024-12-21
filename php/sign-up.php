@@ -1,30 +1,31 @@
 <?php
+@include 'dbconfig.php';
 $exists=false;
 $showAlert = false;  
 $showError = false;
-
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    @include 'dbconfig.php';
-
     $name = test_input($_POST['name']);
     $email = test_input($_POST['email']);
     $password = $_POST['password'];
     $cpassword = $_POST['confirm-password'];
     $user_type = $_POST['account-type'];
-    $img_url = $_FILES['photo']['name'];
-
-    move_uploaded_file($_FILES['photo']['tmp_name'], '../uploads/'.$_FILES['photo']['name']);
-
+    if(validateImgExt($_FILES['photo']['name'])) {
+        $img_url = $_FILES['photo']['name'];
+        move_uploaded_file($_FILES['photo']['tmp_name'], '../uploads/'.$_FILES['photo']['name']);
+    } 
+    else 
+    {
+        $showError = "Invalid image format. Please upload a valid image.";
+    }
     $selectQuery = "SELECT * FROM user WHERE email = '$email'"; 
     $result = $conn -> query($selectQuery); 
-    
     $num = mysqli_num_rows($result);  
     if($num == 0) { 
         if(($password == $cpassword) && $exists==false)
         { 
+            $hash = password_hash($password, PASSWORD_DEFAULT);
             $insertQuery = "INSERT INTO user(name, email, password, user_type, img_url)
-            VALUES('$name','$email','$password','$user_type', '$img_url')";
+            VALUES('$name','$email','$hash','$user_type', '$img_url')";
             $result = mysqli_query($conn, $insertQuery); 
             if ($result) 
             { 
@@ -42,15 +43,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }  
         else
         {  
-            $showError = "Passwords do not match";  
+            $showError = "Passwords don't match !!!";  
         }       
     } 
     if($num>0) { 
-        $exists='email already exist!';  
+        $exists='Email already exist!!!';  
     }  
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +62,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;600&display=swap');
     </style>   
@@ -95,8 +94,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <nav>
             <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="./log-in.php">Log in</a></li>
+                <li><a class="link" href="../index.php">Home</a></li>
+                <li><a class="link" href="./log-in.php">Log in</a></li>
             </ul>
         </nav>
         <img src="../images/CrewHub-logo.png" alt="CrewHub Logo" class="logo">
@@ -114,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
                 <label for="profile-picture">Upload Profile Picture</label>
-                <input type="file" id="profile-picture" name="photo" style="border: none;">
+                <input type="file" id="profile-picture" name="photo" accept=".jpg, .png, .jpeg" style="border: none;">
                 <label>Account Type</label>
                 <div>
                     <input type="radio" name="account-type" value="Normal" checked>Normal User
