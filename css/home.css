@@ -33,7 +33,7 @@ header nav ul li {
     margin-right: 15px;
 }
 
-header nav ul li a {
+header nav ul li a.link {
     color: #0E86D4;
     text-decoration: none;
     padding: 10px;
@@ -43,7 +43,7 @@ header nav ul li a {
     position: relative;
 }
 
-header nav ul li a::after {
+header nav ul li a.link::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -58,7 +58,7 @@ header nav ul li a::after {
     -o-transition: 0.5s;
 }
 
-header nav ul li a:hover::after {
+header nav ul li a.link:hover::after {
     width: 80%;
     height: 2px;
 }
