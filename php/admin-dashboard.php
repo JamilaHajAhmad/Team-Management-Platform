@@ -23,10 +23,7 @@ session_start();
             <div class="user-photo" onclick="toggleLogoutMenu()" style="left:550px;">
                 <img src="../uploads/<?php echo $_SESSION['img_url'] ?>" alt="User Photo" class="user-img">
             </div>
-            <div class="logout-menu" id="logoutMenu"
-                onclick=
-                "<?php session_unset();            
-                session_destroy(); ?>">
+            <div class="logout-menu" id="logoutMenu">
                 <a href="../index.php">Log Out</a>
             </div>
         </div>
